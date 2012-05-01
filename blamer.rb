@@ -7,8 +7,8 @@ require 'optparse'
 require 'colored'
 require 'yaml'
 
-require 'lib/blame'
-require 'lib/exception_group'
+require_relative 'lib/blame'
+require_relative 'lib/exception_group'
 
 ##
 # APP SETUP
@@ -50,6 +50,8 @@ blames = {}
 # PARSING
 ##
 
+puts "Grabbing list of errors from Airbrake..." if options[:verbose]
+
 doc = if options.has_key? :file
         Nokogiri::XML.parse open(options[:file])
       else
@@ -60,7 +62,7 @@ doc = if options.has_key? :file
 doc.css('group').each do |group|
   e = ExceptionGroup.parse_from_node group
 
-  puts "Processing error #{e.id}..." if options[:verbose]
+  puts "Grabbing backtrace for error #{e.id}..." if options[:verbose]
 
   # now grab the backtraces
   xml = SimpleHttp.get sprintf(ERROR_URL, e.id)
@@ -90,7 +92,7 @@ puts "\nLEADERBOARD OF OPPORTUNITY\n".magenta.underline.bold
 blames.each do |blame|
   blame.sort_exceptions!
 
-  puts "#{i}.".rjust(3) + " #{blame.author.bold.red.underline} " + "(#{"%.2f" % blame.score})".magenta
+  puts "\n#{i}.".rjust(3) + " #{blame.author.bold.red.underline} " + "(#{"%.2f" % blame.score})".magenta
   
   blame.exceptions.each do |e|
     puts "\t#{("%.2f" % e.score).rjust(5)}".green +  "\t#{e.notices_count}".yellow + "\t#{e.time_since_last_error / 60} mins ago".blue + "\t#{e.error_message[0..80]} in #{e.file}:#{e.line} (#{e.id})"
