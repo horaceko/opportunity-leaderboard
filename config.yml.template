@@ -1,0 +1,5 @@
+airbrake:
+  project_id: <PROJECT_ID>
+  auth_token: <AUTH_TOKEN>
+project:
+  path: <PROJECT_PATH>
