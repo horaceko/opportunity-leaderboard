@@ -48,7 +48,7 @@ class ExceptionGroup
     backtraces.each do |line|
       line.gsub!(/\[PROJECT_ROOT\]\//, "")
 
-      if line =~ /^(?:app|lib)/
+      if line =~ /^(?:app)/
         m = /^(?<path>.+)\:(?<line>[[:digit:]]+):in/.match(line)
 
         unless m.nil?
