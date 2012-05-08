@@ -34,3 +34,7 @@ The default mode of running Opportunity should be sufficient for most cases:
 If you want to replicate the way in which Opportunity is run during the Engineering meetings, use the following:
 
     ./opportunity.rb --top 5 -r --presenter
+
+# In Summary
+
+![so fierce](http://cdn.memegenerator.net/instances/400x/20148185.jpg)
