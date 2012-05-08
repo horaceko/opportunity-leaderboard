@@ -1,8 +1,8 @@
-### Leaderboard of Opportunity
+# Leaderboard of Opportunity
 
-## Setup
+## Usage 
 
-  * Copy `config.yml.template` to `config.yml`. Paste in the `project_id` and `auth_token` for Airbrake.
-  * Slap in a path to your Rails project directory
+  * Copy `config.yml.template` to `config.yml` and edit as required
+  * Run `blamer.rb`. You can pass `--help` to see a list of options.
   * ???
   * Profit!!
