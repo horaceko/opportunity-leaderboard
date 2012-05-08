@@ -24,6 +24,7 @@ Usage: opportunity.rb [options]
     -r, --reverse                    Reverse sorting order - lower rankings displayed first (default: off)
         --top NUMBER                 Display the top <NUMBER> of results (default: all)
     -p, --presenter                  Enable presenter mode. Users must hit a keyboard key between printing each item (default: off)
+        --debug                      Enable debugging output
 ```
 
 The default mode of running Opportunity should be sufficient for most cases:
@@ -32,4 +33,4 @@ The default mode of running Opportunity should be sufficient for most cases:
 
 If you want to replicate the way in which Opportunity is run during the Engineering meetings, use the following:
 
-    ./opportunity.rb -v --top 5 -r --presenter
+    ./opportunity.rb --top 5 -r --presenter
