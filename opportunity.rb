@@ -31,6 +31,7 @@ ERROR_URL =  "https://airbnb.airbrake.io/errors/%s.xml?auth_token=#{AUTH_TOKEN}"
 
 options = {
   :verbose => true,
+  :debug => false,
   :pages => 2,
   :reverse => false
 }
@@ -61,6 +62,10 @@ OptionParser.new do |opts|
   opts.on('--presenter', '-p', "Enable presenter mode. Users must hit a keyboard key between printing each item (default: off)") do |p|
     options[:presenter] = true
   end
+
+  opts.on('--debug', "Enable debugging output") do |d|
+    options[:debug] = true
+  end
 end.parse!
 
 blames = {}
@@ -69,27 +74,28 @@ blames = {}
 # PARSING
 ##
 
-puts "Grabbing list of errors from #{options.has_key?(:file) ? "file" : "Airbrake"}..." if options[:verbose]
-
 (1..options[:pages]).each do |page|
-  puts "Getting page #{page}..." if options[:verbose]
+  puts "\nProcessing #{page} of #{options[:pages]} Airbrake error pages" if options[:verbose]
   doc = if options.has_key? :file
           Nokogiri::XML.parse open(options[:file])
         else
           xml = SimpleHttp.get sprintf(ERRORS_URL, page)
+          puts xml if options[:debug]
           Nokogiri::XML.parse xml
         end
 
   doc.css('group').each do |group|
     e = ExceptionGroup.parse_from_node group
 
-    puts "Grabbing backtrace for error #{e.id}..." if options[:verbose]
+    putc "." if options[:verbose]
+    puts "Backtrace for error #{e.id}" if options[:debug]
 
     # now grab the backtraces.
     detail =  if options.has_key? :file
                 group
               else
                 xml = SimpleHttp.get sprintf(ERROR_URL, e.id)
+                puts xml if options[:debug]
                 Nokogiri::XML.parse xml
               end
     
@@ -120,7 +126,7 @@ blames = blames.reverse if options[:reverse]
 
 i = options[:reverse] ? blames.length : 1 
 
-puts "\nLEADERBOARD OF OPPORTUNITY\n".magenta.underline.bold
+puts "\n\nLEADERBOARD OF OPPORTUNITY\n".magenta.underline.bold
 
 if options[:presenter]
   puts "Press any key to continue..."

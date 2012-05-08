@@ -16,6 +16,7 @@ class ExceptionGroup
     Math.log(self.notices_count.to_f) * (1 / Math.log(time_since_last_error))
   end
 
+  # Determine the age of the exception (based on when it was created)
   def age
     unless @age
       if self.created_at.nil?
