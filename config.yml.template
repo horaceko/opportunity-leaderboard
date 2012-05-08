@@ -2,4 +2,4 @@ airbrake:
   project_id: <PROJECT_ID>
   auth_token: <AUTH_TOKEN>
 project:
-  path: <PROJECT_PATH>
+  path: /Users/username/Documents/my_rails_project

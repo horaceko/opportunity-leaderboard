@@ -7,6 +7,7 @@ In short: it's probably best not to be at the top of this leaderboard!
 
 # Setup
 
+  * `git clone git@github.com:warpdude/opportunity-leaderboard.git`
   * Copy `config.yml.template` to `config.yml` and edit as required
   * `bundle install`
   * ???
