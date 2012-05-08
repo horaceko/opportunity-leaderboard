@@ -31,12 +31,12 @@ ERROR_URL =  "https://airbnb.airbrake.io/errors/%s.xml?auth_token=#{AUTH_TOKEN}"
 
 options = {
   :verbose => true,
-  :pages => 3,
+  :pages => 2,
   :reverse => false
 }
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: blamer.rb [options]"
+  opts.banner = "Usage: opportunity.rb [options]"
 
   opts.on("--file FILE", "Pull exeception data from a file") do |f|
     options[:file] = f
@@ -46,19 +46,19 @@ OptionParser.new do |opts|
     options[:verbose] = true
   end
 
-  opts.on("--pages PAGES", "Specify the number of Airbrake error pages to parse (default 3)") do |p|
+  opts.on("--pages PAGES", "Specify the number of Airbrake error pages to parse (default: 2)") do |p|
     options[:pages] = p.to_i
   end
 
-  opts.on('-r', "--reverse", "Reverse sorting order (lower rankings displayed first)") do |r|
+  opts.on('-r', "--reverse", "Reverse sorting order - lower rankings displayed first (default: off)") do |r|
     options[:reverse] = true
   end
 
-  opts.on('--top NUMBER', "Display the top <NUMBER> of results") do |n|
+  opts.on('--top NUMBER', "Display the top <NUMBER> of results (default: all)") do |n|
     options[:number] = n.to_i 
   end
 
-  opts.on('--presenter', '-p', "Enable presenter mode. Users must hit a keyboard key between printing each item.") do |p|
+  opts.on('--presenter', '-p', "Enable presenter mode. Users must hit a keyboard key between printing each item (default: off)") do |p|
     options[:presenter] = true
   end
 end.parse!
