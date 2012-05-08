@@ -21,8 +21,8 @@ Usage: opportunity.rb [options]
 
 The default mode of running Opportunity should be sufficient for most cases:
 
-  ./opportunity.rb
+    ./opportunity.rb
 
 If you want to replicate the way in which Opportunity is run during the Engineering meetings, use the following:
 
-  ./opportunity.rb -v --top 5 -r --presenter
+    ./opportunity.rb -v --top 5 -r --presenter
