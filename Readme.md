@@ -1,12 +1,17 @@
-# Leaderboard of Opportunity
+# Intro
+This is a simple script that parses exception logs from Airbrake, figures out the most likely offending line in the app that caused the exception, and then uses a local copy of the app (and Git blame) to figure out who wrote that line.
 
-## Setup
+It then ranks developers using a scoring algorithm that biases towards high exception rates for individual exceptions, and also a high number of different types of exceptions.
+
+In short: it's probably best not to be at the top of this leaderboard!
+
+# Setup
 
   * Copy `config.yml.template` to `config.yml` and edit as required
   * ???
   * Profit!!
 
-## Usage 
+# Usage 
 The options are as follows:
 
 ```bash
