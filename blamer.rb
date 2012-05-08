@@ -85,7 +85,7 @@ puts "Grabbing list of errors from #{options.has_key?(:file) ? "file" : "Airbrak
 
     puts "Grabbing backtrace for error #{e.id}..." if options[:verbose]
 
-    # now grab the backtraces
+    # now grab the backtraces.
     detail =  if options.has_key? :file
                 group
               else
@@ -95,6 +95,7 @@ puts "Grabbing list of errors from #{options.has_key?(:file) ? "file" : "Airbrak
     
     e.process_backtrace!(detail)
 
+    # figure out the blame
     if e.file && e.line
       name = `cd #{PROJECT['path']} && git blame -L #{e.line},#{e.line} #{e.file} -p | grep "author " | sed "s/author //"`
       name.strip!
@@ -109,9 +110,11 @@ end
 # SCORING
 ##
 
+# sort the values based on score
 blames = blames.values
 blames = blames.sort {|a, b| b.score <=> a.score}
 
+# apply various options like truncation and reversal
 blames = blames[0..(options[:number] - 1)] if options.has_key? :number
 blames = blames.reverse if options[:reverse]
 
