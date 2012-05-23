@@ -26,8 +26,8 @@ PROJECT = CONFIG['project']
 
 PROJECT_ID = AIRBRAKE['project_id']
 AUTH_TOKEN = AIRBRAKE['auth_token']
-ERRORS_URL = "https://airbnb.airbrake.io/errors.xml?project_id=#{PROJECT_ID}&auth_token=#{AUTH_TOKEN}&page=%d"
-ERROR_URL =  "https://airbnb.airbrake.io/errors/%s.xml?auth_token=#{AUTH_TOKEN}"
+ERRORS_URL = "http://airbnb.airbrake.io/errors.xml?project_id=#{PROJECT_ID}&auth_token=#{AUTH_TOKEN}&page=%d"
+ERROR_URL =  "http://airbnb.airbrake.io/errors/%s.xml?auth_token=#{AUTH_TOKEN}"
 
 options = {
   :verbose => true,
